@@ -1,8 +1,4 @@
-// ========================
-// Jeu du Pendu DBZ
-// ========================
-
-// --- Listes des mots par difficulté
+// --- Listes de mots par difficulté ---
 const motsFaciles = [
   "goku", "buu", "cell", "beerus", "bulma", "chichi", "kaio", "nappa", "ten"
 ];
@@ -14,7 +10,7 @@ const motsDifficiles = [
   "namekuseijin", "transformation", "potaras", "dragonballsuper"
 ];
 
-// --- Sélection des éléments
+// --- Récupération des éléments ---
 const wordElement = document.getElementById("word");
 const wrongLettersElement = document.getElementById("wrong-letters");
 const errorsElement = document.getElementById("errors");
@@ -24,6 +20,9 @@ const canvas = document.getElementById("pendu-canvas");
 const ctx = canvas.getContext("2d");
 const difficultySelect = document.getElementById("difficulty");
 const newGameButton = document.getElementById("new-game");
+const keyboardDiv = document.getElementById("keyboard");
+
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 let mot = "";
 let lettresCorrectes = [];
@@ -31,7 +30,7 @@ let lettresIncorrectes = [];
 const maxErreurs = 6;
 let clavierActif = true;
 
-// --- Fonction de choix de mot selon la difficulté
+// --- Choix du mot selon la difficulté ---
 function getMotSelonDifficulte() {
   const niveau = difficultySelect.value;
   if (niveau === "easy") return motsFaciles[Math.floor(Math.random() * motsFaciles.length)];
@@ -39,7 +38,7 @@ function getMotSelonDifficulte() {
   return motsNormaux[Math.floor(Math.random() * motsNormaux.length)];
 }
 
-// --- Démarrer une nouvelle partie
+// --- Démarrer une nouvelle partie ---
 function choisirMot() {
   mot = getMotSelonDifficulte();
   lettresCorrectes = [];
@@ -50,9 +49,11 @@ function choisirMot() {
   dessinerPendu(0);
   afficherMot();
   clavierActif = true;
+  renderKeyboard();
+  replayButton.style.display = "none";
 }
 
-// --- Afficher le mot à deviner
+// --- Affichage du mot à deviner ---
 function afficherMot() {
   wordElement.innerHTML = mot
     .split("")
@@ -60,7 +61,51 @@ function afficherMot() {
     .join(" ");
 }
 
-// --- Dessin du pendu DBZ (Freezer)
+// --- Clavier virtuel dynamique ---
+function renderKeyboard() {
+  keyboardDiv.innerHTML = "";
+  for (let l of alphabet) {
+    const btn = document.createElement("button");
+    btn.textContent = l;
+    btn.id = "key-" + l;
+    btn.disabled = lettresCorrectes.includes(l) || lettresIncorrectes.includes(l) || !clavierActif;
+    btn.addEventListener("click", () => handleVirtualKey(l));
+    keyboardDiv.appendChild(btn);
+  }
+}
+
+// --- Gestion du clic sur clavier virtuel ---
+function handleVirtualKey(lettre) {
+  if (!clavierActif) return;
+  processInput(lettre);
+}
+
+// --- Saisie clavier physique ---
+function handleKeydown(e) {
+  if (!clavierActif) return;
+  const lettre = e.key.toLowerCase();
+  processInput(lettre);
+}
+
+// --- Traitement commun (virtuel/physique) ---
+function processInput(lettre) {
+  if (!/^[a-z]$/.test(lettre)) return;
+  if (lettresCorrectes.includes(lettre) || lettresIncorrectes.includes(lettre)) return;
+
+  if (mot.includes(lettre)) {
+    lettresCorrectes.push(lettre);
+  } else {
+    lettresIncorrectes.push(lettre);
+    errorsElement.textContent = lettresIncorrectes.length;
+    dessinerPendu(lettresIncorrectes.length);
+  }
+  afficherMot();
+  wrongLettersElement.textContent = lettresIncorrectes.join(", ");
+  verifierFinJeu();
+  renderKeyboard();
+}
+
+// --- Dessin du pendu façon Freezer ---
 function dessinerPendu(erreurs) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -147,66 +192,29 @@ function dessinerPendu(erreurs) {
   }
 }
 
-// --- Vérifie la fin du jeu
+// --- Vérification de la victoire ou de la défaite ---
 function verifierFinJeu() {
   const motUnique = [...new Set(mot)];
   if (motUnique.every(l => lettresCorrectes.includes(l))) {
     messageElement.textContent = "🎉 Bravo, tu as gagné !";
     clavierActif = false;
     replayButton.style.display = "inline-block";
+    renderKeyboard();
   } else if (lettresIncorrectes.length >= maxErreurs) {
     messageElement.textContent = `💀 Freezer a gagné ! Le mot était : ${mot}`;
     afficherMot();
     clavierActif = false;
     replayButton.style.display = "inline-block";
+    renderKeyboard();
   }
 }
 
-// --- Gestion du clavier
-function handleKeydown(e) {
-  if (!clavierActif) return;
-  const lettre = e.key.toLowerCase();
-  if (/^[a-z]$/.test(lettre)) {
-    if (mot.includes(lettre)) {
-      if (!lettresCorrectes.includes(lettre)) {
-        lettresCorrectes.push(lettre);
-      }
-    } else {
-      if (!lettresIncorrectes.includes(lettre)) {
-        lettresIncorrectes.push(lettre);
-        errorsElement.textContent = lettresIncorrectes.length;
-        dessinerPendu(lettresIncorrectes.length);
-      }
-    }
-    afficherMot();
-    wrongLettersElement.textContent = lettresIncorrectes.join(", ");
-    verifierFinJeu();
-  }
-}
+// --- Evénements ---
 
-// --- Bouton Nouvelle partie
-newGameButton.addEventListener("click", () => {
-  choisirMot();
-  replayButton.style.display = "none";
-});
-
-// --- Bouton Replay
-replayButton.addEventListener("click", () => {
-  choisirMot();
-  replayButton.style.display = "none";
-});
-
-// --- Changement de difficulté = nouvelle partie
-difficultySelect.addEventListener("change", () => {
-  choisirMot();
-  replayButton.style.display = "none";
-});
-
-// --- Activation du clavier global
+newGameButton.addEventListener("click", choisirMot);
+replayButton.addEventListener("click", choisirMot);
+difficultySelect.addEventListener("change", choisirMot);
 document.addEventListener("keydown", handleKeydown);
 
-// --- Démarrage automatique
-window.addEventListener("DOMContentLoaded", () => {
-  choisirMot();
-  replayButton.style.display = "none";
-});
+// --- Démarrage auto au chargement
+window.addEventListener("DOMContentLoaded", choisirMot);

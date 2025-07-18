@@ -114,3 +114,32 @@ label {
   width: 100vw; height: 100vh;
   z-index: -1;
 }
+
+.keyboard {
+  margin: 22px auto 10px auto;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 340px;
+  justify-content: center;
+  gap: 6px;
+}
+
+.keyboard button {
+  width: 34px;
+  height: 40px;
+  margin: 2px;
+  font-size: 1.2em;
+  border-radius: 6px;
+  background: #2a2a44;
+  color: #ffd740;
+  border: 1.5px solid #a259ff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.22s, color 0.15s;
+}
+.keyboard button:disabled {
+  background: #18151a;
+  color: #555;
+  border-color: #333;
+  cursor: not-allowed;
+}
