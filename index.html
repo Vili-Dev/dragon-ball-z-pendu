@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Jeu du Pendu - Dragon Ball Z</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-bg">
+  <h1>🐉 Jeu du Pendu - Dragon Ball Z</h1>
+
+  <canvas id="pendu-canvas" width="250" height="250"></canvas>
+
+  <div id="game">
+    <p>Devine le mot :</p>
+    <div id="word"></div>
+    <p>Lettres incorrectes : <span id="wrong-letters"></span></p>
+    <p>Erreurs : <span id="errors">0</span> / 6</p>
+    <p id="message"></p>
+    <button id="replay" style="display: none;">🔄 Rejouer</button>
+  </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

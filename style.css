@@ -1,0 +1,61 @@
+body {
+  font-family: 'Arial Black', sans-serif;
+  color: #ffcc00;
+  text-align: center;
+  background: linear-gradient(to bottom, #000, #1a1a1a);
+  min-height: 98vh;
+  /* padding: 20px; */
+}
+
+.main-bg {
+  /* background: linear-gradient(to bottom, #000, #1a1a1a);  */
+  display: inline-block;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+h1 {
+  color: #ff9900;
+  text-shadow: 2px 2px #000;
+  font-size: 2rem;
+}
+
+canvas {
+  background-color: #222;
+  border: 2px solid #ffcc00;
+  margin: 20px auto;
+  display: block;
+}
+
+#word {
+  font-size: 2rem;
+  letter-spacing: 10px;
+  margin: 20px 0;
+}
+
+#wrong-letters {
+  color: crimson;
+  font-weight: bold;
+}
+
+#message {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#replay {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #ff9900;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#replay:hover {
+  background: #ff6600;
+}
