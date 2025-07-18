@@ -45,7 +45,7 @@ Jeu du pendu sur le thème Dragon Ball Z, avec dessin animé sur canvas (Freezer
 ---
 
 ## 🧩 Structure du projet
-
+```
 📦 pendu-dbz
 ├── index.html
 ├── style.css
@@ -54,7 +54,7 @@ Jeu du pendu sur le thème Dragon Ball Z, avec dessin animé sur canvas (Freezer
 ├── particles.json
 ├── images/
 │ └── preview.png
-
+```
 
 ---
 
