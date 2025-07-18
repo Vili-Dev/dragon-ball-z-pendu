@@ -3,13 +3,21 @@ body {
   color: #fff;
   font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
+  padding: 0;
+  /* min-height: 100vh; */
+  box-sizing: border-box;
   text-align: center;
-  min-height: 96vh;
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 10vh;
+  overflow-x: hidden !important;
 }
+
+
 
 h1 {
   color: #ffa500;
-  margin-top: 30px;
+  margin: 26px 0 8px 0;
   letter-spacing: 2px;
   font-size: 2.2em;
 }
@@ -20,10 +28,7 @@ label {
   color: #fff8e1;
 }
 
-.container {
-   margin-top: 70px;
-}
-
+/* Select difficulté + boutons */
 #difficulty {
   font-size: 1.1em;
   padding: 7px 16px;
@@ -36,7 +41,7 @@ label {
   box-shadow: 0 2px 4px #0006;
 }
 
-#new-game {
+#new-game, #replay {
   font-size: 1.1em;
   padding: 7px 18px;
   border-radius: 7px;
@@ -48,15 +53,26 @@ label {
   box-shadow: 0 2px 7px #a259ff33;
   cursor: pointer;
   transition: background 0.25s, transform 0.15s;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 4px;
 }
-#new-game:hover {
+#new-game:hover, #replay:hover {
   background: linear-gradient(90deg,#a259ff 20%,#ff9800 100%);
   transform: scale(1.04);
 }
 
+#replay {
+  display: none;
+}
+
 #pendu-canvas {
+  width: 95vw;
+  max-width: 280px;
+  min-width: 180px;
+  height: auto;
   display: block;
-  margin: 0 auto 20px;
+  margin: 0 auto 20px auto;
   background: #222;
   border-radius: 12px;
   box-shadow: 0 0 18px #311b9244;
@@ -64,21 +80,24 @@ label {
 }
 
 .word-display {
-  font-size: 2.3em;
+  font-size: 2.2em;
   letter-spacing: 0.36em;
   margin: 18px 0 8px 0;
   font-weight: bold;
   color: #fff;
   text-shadow: 0 2px 6px #a259ff55;
+  word-break: break-all;
+  padding: 2px 2vw;
 }
 
 #errors, #wrong-letters {
   color: #ff9800;
   font-weight: bold;
+  font-size: 1.13em;
+  word-break: break-all;
 }
 
 #wrong-letters {
-  font-size: 1.15em;
   letter-spacing: 0.09em;
   margin-left: 6px;
 }
@@ -91,30 +110,6 @@ label {
   min-height: 1.7em;
 }
 
-#replay {
-  font-size: 1.1em;
-  padding: 8px 25px;
-  border-radius: 6px;
-  background: linear-gradient(90deg,#a259ff 50%,#ff9800 100%);
-  color: #fff;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.12s;
-  box-shadow: 0 2px 8px #ff980033;
-}
-#replay:hover {
-  background: linear-gradient(90deg,#ff9800 30%,#a259ff 100%);
-  transform: scale(1.06);
-}
-
-#particles-js {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  z-index: -1;
-}
-
 .keyboard {
   margin: 22px auto 10px auto;
   display: flex;
@@ -123,7 +118,6 @@ label {
   justify-content: center;
   gap: 6px;
 }
-
 .keyboard button {
   width: 34px;
   height: 40px;
@@ -142,4 +136,107 @@ label {
   color: #555;
   border-color: #333;
   cursor: not-allowed;
+}
+
+/* Particles.js fond animé */
+#particles-js {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  max-width: 100vw; max-height: 100vh;
+  z-index: -1;
+  pointer-events: none; /* Pour éviter de bloquer les clics du jeu */
+}
+
+canvas.particles-js-canvas-el {
+  display: block !important;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw !important; height: 100vh !important;
+  max-width: 100vw !important; max-height: 100vh !important;
+  pointer-events: none !important;
+  box-sizing: border-box;
+  overflow: hidden !important;
+  /* Pour forcer l'arrêt du débordement */
+
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 1300px) {
+  h1 {
+    font-size: 4em;
+    margin-top: 14px;
+  }
+  .word-display {
+    font-size: 4em;
+    padding: 2px 2vw;
+  }
+  #pendu-canvas {
+    max-width: 98vw;
+    min-width: 120px;
+  }
+  #difficulty, #new-game, #replay {
+    font-size: 0.99em;
+    padding: 7px 9px;
+  }
+  .keyboard button {
+ width: 60px;
+  height: 80px;
+  margin: 2px;
+  font-size: 1.2em;
+  border-radius: 6px;
+  background: #2a2a44;
+  color: #ffd740;
+  border: 1.5px solid #a259ff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.22s, color 0.15s;
+  }
+  .keyboard {
+    max-width: 98vw;
+    gap: 70px;
+    
+  }
+
+  #pendu-canvas {
+  width: 95vw;
+  max-width: 500px;
+  min-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
+  background: #222;
+  border-radius: 12px;
+  box-shadow: 0 0 18px #311b9244;
+  border: 1px solid #ff9800;
+}
+
+#difficulty {
+  font-size: 2em;
+  padding: 7px 16px;
+  border-radius: 7px;
+  border: 1px solid #ffe082;
+  background-color: #222;
+  color: #ffd740;
+  outline: none;
+  margin-right: 8px;
+  box-shadow: 0 2px 4px #0006;
+}
+
+#new-game, #replay {
+  font-size: 2em;
+  padding: 7px 18px;
+  border-radius: 7px;
+  background: linear-gradient(90deg,#ff9800 60%,#a259ff 100%);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 7px #a259ff33;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.15s;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 4px;
+}
 }
