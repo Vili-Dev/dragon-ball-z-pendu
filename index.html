@@ -2,25 +2,47 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Jeu du Pendu - Dragon Ball Z</title>
+  <title>Pendu DBZ</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-bg">
-  <h1>🐉 Jeu du Pendu - Dragon Ball Z</h1>
+  <div class="container">
+  <div id="particles-js"></div>
+  <h1>👾 Pendu Dragon Ball Z</h1>
 
-  <canvas id="pendu-canvas" width="250" height="250"></canvas>
+  <div style="margin:20px 0;">
+    <label for="difficulty">Difficulté :</label>
+    <select id="difficulty">
+      <option value="easy">Facile</option>
+      <option value="normal" selected>Normal</option>
+      <option value="hard">Difficile</option>
+    </select>
+    <button id="new-game">🎮 Nouvelle partie</button>
+  </div>
 
-  <div id="game">
-    <p>Devine le mot :</p>
-    <div id="word"></div>
-    <p>Lettres incorrectes : <span id="wrong-letters"></span></p>
-    <p>Erreurs : <span id="errors">0</span> / 6</p>
-    <p id="message"></p>
-    <button id="replay" style="display: none;">🔄 Rejouer</button>
+  <canvas id="pendu-canvas" width="250" height="210" style="background:#1a1a1a;border-radius:10px;margin-bottom:16px;box-shadow:0 0 8px #333"></canvas>
+
+  <div id="word" class="word-display" style="font-size:2em;letter-spacing:0.4em;margin-bottom:8px"></div>
+
+  <div>
+    <strong>Erreurs :</strong> <span id="errors">0</span> / 6
   </div>
+  <div>
+    <strong>Lettres fausses :</strong> <span id="wrong-letters"></span>
   </div>
+
+  <div id="message" style="font-size:1.2em;color:#ffa500;margin:18px 0"></div>
+
+  <button id="replay" style="display:none">🔄 Rejouer</button>
+
+</div>
 
   <script src="script.js"></script>
+  <script src="particles.js"></script>
+<script>
+  particlesJS.load('particles-js', 'particles.json', function() {
+    console.log('✨ Particules chargées DBZ !');
+  });
+</script>
 </body>
 </html>
