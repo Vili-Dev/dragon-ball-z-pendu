@@ -17,6 +17,8 @@ Jeu du pendu sur le thème Dragon Ball Z, avec dessin animé sur canvas (Freezer
 
 ---
 
+➡️ [Voir la démo sur Netlify](https://pendu-dragon-ball.netlify.app/)
+
 ## 📷 Aperçu
 
 ![aperçu du jeu](images/exemple-dbz-pendu.png)
