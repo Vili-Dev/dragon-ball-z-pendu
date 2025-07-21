@@ -19,7 +19,7 @@ h1 {
   color: #ffa500;
   margin: 26px 0 8px 0;
   letter-spacing: 2px;
-  font-size: 2.2em;
+  font-size: 3.2em;
 }
 
 label {
@@ -42,7 +42,7 @@ label {
 }
 
 #new-game, #replay {
-  font-size: 1.1em;
+  font-size: 1.8em;
   padding: 7px 18px;
   border-radius: 7px;
   background: linear-gradient(90deg,#ff9800 60%,#a259ff 100%);
@@ -68,7 +68,7 @@ label {
 
 #pendu-canvas {
   width: 95vw;
-  max-width: 280px;
+  max-width: 300px;
   min-width: 180px;
   height: auto;
   display: block;
@@ -110,17 +110,21 @@ label {
   min-height: 1.7em;
 }
 
+.erreur-aie {
+  font-size: 1.5em !important;
+}
+
 .keyboard {
   margin: 22px auto 10px auto;
   display: flex;
   flex-wrap: wrap;
-  max-width: 340px;
+  max-width: 740px;
   justify-content: center;
   gap: 6px;
 }
 .keyboard button {
-  width: 34px;
-  height: 40px;
+  width: 54px;
+  height: 60px;
   margin: 2px;
   font-size: 1.2em;
   border-radius: 6px;
@@ -162,81 +166,29 @@ canvas.particles-js-canvas-el {
 }
 
 /* Responsive pour petits écrans */
-@media (max-width: 1300px) {
-  h1 {
-    font-size: 4em;
-    margin-top: 14px;
+@media (max-width: 900px) {
+  h1 { font-size: 2rem; }
+  .word-display { font-size: 1.2rem; }
+  .keyboard button {
+    font-size: 0.85em;
+    height: 2em;
+    min-width: 24px;
+    max-width: 42px;
   }
-  .word-display {
-    font-size: 4em;
-    padding: 2px 2vw;
-  }
-  #pendu-canvas {
-    max-width: 98vw;
-    min-width: 120px;
-  }
+  #pendu-canvas { max-width: 95vw; }
+}
+@media (max-width: 600px) {
+  h1 { font-size: 1.3rem; }
+  .word-display { font-size: 1rem; }
   #difficulty, #new-game, #replay {
-    font-size: 0.99em;
-    padding: 7px 9px;
+    font-size: 0.9rem;
+    padding: 0.5em 0.8em;
   }
   .keyboard button {
- width: 60px;
-  height: 80px;
-  margin: 2px;
-  font-size: 1.2em;
-  border-radius: 6px;
-  background: #2a2a44;
-  color: #ffd740;
-  border: 1.5px solid #a259ff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.22s, color 0.15s;
+    font-size: 0.78em;
+    height: 1.7em;
+    min-width: 18px;
+    max-width: 32px;
   }
-  .keyboard {
-    max-width: 98vw;
-    gap: 70px;
-    
-  }
-
-  #pendu-canvas {
-  width: 95vw;
-  max-width: 500px;
-  min-width: 200px;
-  height: auto;
-  display: block;
-  margin: 0 auto 20px auto;
-  background: #222;
-  border-radius: 12px;
-  box-shadow: 0 0 18px #311b9244;
-  border: 1px solid #ff9800;
-}
-
-#difficulty {
-  font-size: 2em;
-  padding: 7px 16px;
-  border-radius: 7px;
-  border: 1px solid #ffe082;
-  background-color: #222;
-  color: #ffd740;
-  outline: none;
-  margin-right: 8px;
-  box-shadow: 0 2px 4px #0006;
-}
-
-#new-game, #replay {
-  font-size: 2em;
-  padding: 7px 18px;
-  border-radius: 7px;
-  background: linear-gradient(90deg,#ff9800 60%,#a259ff 100%);
-  color: #fff;
-  border: none;
-  font-weight: bold;
-  letter-spacing: 1px;
-  box-shadow: 0 2px 7px #a259ff33;
-  cursor: pointer;
-  transition: background 0.25s, transform 0.15s;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-bottom: 4px;
-}
+  #pendu-canvas { max-width: 98vw; }
 }
